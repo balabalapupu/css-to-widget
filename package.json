@@ -2,8 +2,8 @@
   "name": "css-to-widget",
   "displayName": "css-to-widget",
   "publisher": "wangtianyou",
-  "description": "",
-  "version": "0.0.1",
+  "description": "vscode 插件 自动格式化css样式变成flutter样式",
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.84.0"
   },

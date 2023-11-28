@@ -25,11 +25,7 @@ export function convertCssToBaseStyleMap(text): BaseStyleList[] {
   }
   return [];
 }
-
-// decoration: BoxDecoration(
-//   color: Color.fromRGBO(0, 168, 90, 0.10),
-//   borderRadius: BorderRadius.circular(4),
-// ),
+const ignoreKey = ["line-height"];
 
 export function convertStyleListToWidgetList(
   styleList: BaseStyleList[]
@@ -37,28 +33,30 @@ export function convertStyleListToWidgetList(
   const result = [];
   try {
     styleList.forEach((item) => {
-      const currentComponentList: StyleDetailInfoType = styleMap.find(
-        (_item) => _item.originKey == item.styleKey
-      );
-      if (!currentComponentList) {
-        throw new Error("检查圈选范围，是否有key没圈选全");
+      if (!ignoreKey.includes(item.styleKey)) {
+        const currentComponentList: StyleDetailInfoType = styleMap.find(
+          (_item) => _item.originKey == item.styleKey
+        );
+        if (!currentComponentList) {
+          throw new Error("检查圈选范围，是否有key没圈选全");
+        }
+        const __value = item.styleValue.trim();
+        const curStyleComponent = currentComponentList.components;
+        const curStylekey = currentComponentList.key;
+        const curStyleValueFormat = currentComponentList.valueFormat ?? null;
+        const curClass = new curStyleComponent(
+          curStylekey,
+          curStyleValueFormat,
+          currentComponentList
+        );
+        curClass.setValue(__value);
+        const curClassOutput = curClass.getValue();
+        const str = `${curClassOutput.key}: ${curClassOutput.value},\n`;
+        result.push({
+          type: currentComponentList?.decorator ?? "insert",
+          str,
+        });
       }
-      const __value = item.styleValue.trim();
-      const curStyleComponent = currentComponentList.components;
-      const curStylekey = currentComponentList.key;
-      const curStyleValueFormat = currentComponentList.valueFormat ?? null;
-      const curClass = new curStyleComponent(
-        curStylekey,
-        curStyleValueFormat,
-        currentComponentList
-      );
-      curClass.setValue(__value);
-      const curClassOutput = curClass.getValue();
-      const str = `${curClassOutput.key}: ${curClassOutput.value},\n`;
-      result.push({
-        type: currentComponentList?.decorator ?? "insert",
-        str,
-      });
     });
     return result;
   } catch (error) {
