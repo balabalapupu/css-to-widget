@@ -31,6 +31,12 @@ const baseComponentsList: StyleDetailInfoType[] = [
 const edgeComponentsList: StyleDetailInfoType[] = [
   {
     components: EdgeComponents,
+    key: "border",
+    decorator: "BoxDecoration",
+    originKey: "border",
+  },
+  {
+    components: EdgeComponents,
     key: "borderRadius",
     decorator: "BoxDecoration",
     originKey: "border-radius",

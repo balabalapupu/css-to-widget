@@ -3,7 +3,7 @@
   "displayName": "css-to-widget",
   "publisher": "wangtianyou",
   "description": "vscode 插件 自动格式化css样式变成flutter样式",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "engines": {
     "vscode": "^1.84.0"
   },

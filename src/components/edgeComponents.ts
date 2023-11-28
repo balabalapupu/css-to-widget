@@ -1,3 +1,4 @@
+import { BorderInset } from "./styleMap/borderInset";
 import { BorderRadius } from "./styleMap/borderRadius";
 import { EdgeInset } from "./styleMap/edgeInset";
 
@@ -7,6 +8,7 @@ export const widgetMap = {
   padding: EdgeInset,
   margin: EdgeInset,
   borderRadius: BorderRadius,
+  border: BorderInset,
 };
 
 export class EdgeComponents {
