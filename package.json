@@ -1,6 +1,7 @@
 {
   "name": "css-to-widget",
   "displayName": "css-to-widget",
+  "publisher": "wangtianyou",
   "description": "",
   "version": "0.0.1",
   "engines": {
@@ -9,7 +10,13 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "repository": {
+    "type": "git",
+    "url": "https://https://github.com/balabalapupu/css-to-widget"
+  },
+  "activationEvents": [
+    "onCommand:css-to-widget"
+  ],
   "main": "./dist/extension.js",
   "contributes": {
     "languages": [
