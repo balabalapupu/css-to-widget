@@ -11,17 +11,17 @@ export const widgetMap = {
 export class BoxConstraintsComponents implements StyleComponentsClassInterface {
   private key: BoxComponentsKey;
   private value: string;
-  private valueFormal: ValueFormatType;
+  private valueFormat: ValueFormatType;
   constructor(key: BoxComponentsKey, valueFormat: ValueFormatType) {
     this.key = key;
-    this.valueFormal = valueFormat;
+    this.valueFormat = valueFormat;
   }
   public setValue(config) {
     this.value = config;
   }
 
   public getValue() {
-    const convertedValue = convertValue(this.value);
+    const convertedValue = convertValue(this.value, this.valueFormat);
     const widget = widgetMap[this.key];
     if (widget) {
       return widget(convertedValue, this.key);

@@ -14,7 +14,7 @@ export const widgetMap = {
 export class EdgeComponents implements StyleComponentsClassInterface {
   private key: edgeComponentsKey;
   private value: any;
-  private valueFormal: ValueFormatType;
+  private valueFormat: ValueFormatType;
   private direction: string;
   constructor(
     key: edgeComponentsKey,
@@ -22,7 +22,7 @@ export class EdgeComponents implements StyleComponentsClassInterface {
     arg: StyleComponentsType
   ) {
     this.key = key;
-    this.valueFormal = valueFormat;
+    this.valueFormat = valueFormat;
     this.direction = arg.direction ?? "";
   }
   public setValue(value: any): void {

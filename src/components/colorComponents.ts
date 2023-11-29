@@ -9,7 +9,7 @@ export const widgetMap = {
 export class ColorComponents implements StyleComponentsClassInterface {
   private key: colorComponentsKey;
   private value: string;
-  private valueFormal: ValueFormatType;
+  private valueFormat: ValueFormatType;
   private direction: string;
   constructor(
     key: colorComponentsKey,
@@ -17,7 +17,7 @@ export class ColorComponents implements StyleComponentsClassInterface {
     arg: StyleComponentsType
   ) {
     this.key = key;
-    this.valueFormal = valueFormat;
+    this.valueFormat = valueFormat;
     this.direction = arg.direction ?? "";
   }
   public setValue(config) {

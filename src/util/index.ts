@@ -10,11 +10,11 @@ export function capitalizeFirstLetter(str) {
   return `${firstChar.toUpperCase()}${rest.join("")}`;
 }
 
-export function convertValue(value) {
-  if (this.valueFormal == "pixel") {
-    const __value = this.value.replace("px", "");
+export function convertValue(value, valueFormat) {
+  if (valueFormat == "pixel") {
+    const __value = value.replace("px", "");
     return Number(__value).toFixed(1);
-  } else if (this.valueFormal == "string") {
+  } else if (valueFormat == "string") {
     return `'${value}'`;
   }
   return value;

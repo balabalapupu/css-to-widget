@@ -21,16 +21,16 @@ export const widgetMap = {
 export class BaseComponents implements StyleComponentsClassInterface {
   private key: BaseComponentsKey;
   private value: string;
-  private valueFormal: ValueFormatType;
+  private valueFormat: ValueFormatType;
   constructor(key: BaseComponentsKey, valueFormat: ValueFormatType) {
     this.key = key;
-    this.valueFormal = valueFormat;
+    this.valueFormat = valueFormat;
   }
   public setValue(config) {
     this.value = config;
   }
   public getValue() {
-    const convertedValue = convertValue(this.value);
+    const convertedValue = convertValue(this.value, this.valueFormat);
     if (widgetMap[this.key]) {
       const curWidgetList = widgetMap[this.key];
       return {

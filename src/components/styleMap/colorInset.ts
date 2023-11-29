@@ -3,7 +3,6 @@ export function ColorInset(config: string) {
   if (trimConfig.includes("rgba")) {
     const regExp = /rgba\((.*?)\)/;
     const match = trimConfig.match(regExp);
-    console.log(match[1]);
     return `Color.fromRGBO(${match[1]})`;
   } else if (trimConfig.includes("#")) {
     const [, curColor] = trimConfig.split("#");
