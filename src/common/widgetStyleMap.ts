@@ -1,7 +1,22 @@
+import { BoxConstraintsComponents } from "../components/BoxConstraintsComponents";
 import { BaseComponents } from "../components/baseComponents";
 import { ColorComponents } from "../components/colorComponents";
 import { EdgeComponents } from "../components/edgeComponents";
-const baseComponentsList: StyleDetailInfoType[] = [
+
+type BaseComponentsListType = BaseStyleComponentsType &
+  StyleComponentsWithFormatType;
+
+type EdgeComponentsListType = BaseStyleComponentsType &
+  Partial<StyleComponentsWithDecoratorType> &
+  Partial<StyleComponentsWithDirectionType>;
+type ColorComponentsListType = BaseStyleComponentsType &
+  Partial<StyleComponentsWithDecoratorType>;
+
+type BoxComponentsListType = BaseStyleComponentsType &
+  Partial<StyleComponentsWithDecoratorType> &
+  StyleComponentsWithFormatType;
+
+const baseComponentsList: BaseComponentsListType[] = [
   {
     components: BaseComponents,
     key: "fontSize",
@@ -28,7 +43,7 @@ const baseComponentsList: StyleDetailInfoType[] = [
   },
 ];
 
-const edgeComponentsList: StyleDetailInfoType[] = [
+const edgeComponentsList: EdgeComponentsListType[] = [
   {
     components: EdgeComponents,
     key: "border",
@@ -100,7 +115,7 @@ const edgeComponentsList: StyleDetailInfoType[] = [
     originKey: "margin-bottom",
   },
 ];
-const colorComponentsList: StyleDetailInfoType[] = [
+const colorComponentsList: ColorComponentsListType[] = [
   {
     components: ColorComponents,
     key: "color",
@@ -113,8 +128,40 @@ const colorComponentsList: StyleDetailInfoType[] = [
     originKey: "color",
   },
 ];
-export const styleMap: StyleDetailInfoType[] = [
+// 宽高
+const boxComponentsList: BoxComponentsListType[] = [
+  {
+    components: BoxConstraintsComponents,
+    key: "width",
+    originKey: "width",
+    valueFormat: "pixel",
+    decorator: "BoxConstraints",
+  },
+  {
+    components: BoxConstraintsComponents,
+    key: "height",
+    originKey: "height",
+    valueFormat: "pixel",
+    decorator: "BoxConstraints",
+  },
+  {
+    components: BoxConstraintsComponents,
+    key: "minWidth",
+    originKey: "min-width",
+    valueFormat: "pixel",
+    decorator: "BoxConstraints",
+  },
+  {
+    components: BoxConstraintsComponents,
+    key: "minHeight",
+    originKey: "min-height",
+    valueFormat: "pixel",
+    decorator: "BoxConstraints",
+  },
+];
+export const styleMap: StyleComponentsType[] = [
   ...baseComponentsList,
   ...edgeComponentsList,
   ...colorComponentsList,
+  ...boxComponentsList,
 ];

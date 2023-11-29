@@ -1,3 +1,5 @@
+import { convertValue } from "../util";
+
 type BaseComponentsKey = "FontWeight" | "fontSize" | "fontFamily";
 
 export const fontWeight = {
@@ -16,7 +18,7 @@ export const widgetMap = {
   fontWeight: fontWeight,
 };
 
-export class BaseComponents {
+export class BaseComponents implements StyleComponentsClassInterface {
   private key: BaseComponentsKey;
   private value: string;
   private valueFormal: ValueFormatType;
@@ -28,7 +30,7 @@ export class BaseComponents {
     this.value = config;
   }
   public getValue() {
-    const convertedValue = this.convertValue(this.value);
+    const convertedValue = convertValue(this.value);
     if (widgetMap[this.key]) {
       const curWidgetList = widgetMap[this.key];
       return {
@@ -41,13 +43,5 @@ export class BaseComponents {
         value: convertedValue,
       };
     }
-  }
-  convertValue(value) {
-    if (this.valueFormal == "pixel") {
-      return this.value.replace("px", "");
-    } else if (this.valueFormal == "string") {
-      return `'${value}'`;
-    }
-    return value;
   }
 }

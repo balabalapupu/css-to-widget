@@ -6,7 +6,7 @@ export const widgetMap = {
   color: ColorInset,
 };
 
-export class ColorComponents {
+export class ColorComponents implements StyleComponentsClassInterface {
   private key: colorComponentsKey;
   private value: string;
   private valueFormal: ValueFormatType;
@@ -14,7 +14,7 @@ export class ColorComponents {
   constructor(
     key: colorComponentsKey,
     valueFormat: ValueFormatType,
-    arg: StyleDetailInfoType
+    arg: StyleComponentsType
   ) {
     this.key = key;
     this.valueFormal = valueFormat;

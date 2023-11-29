@@ -8,6 +8,7 @@ export function ColorInset(config: string) {
   } else if (trimConfig.includes("#")) {
     const [, curColor] = trimConfig.split("#");
     return `Color(#0xFF${curColor.toUpperCase()})`;
+  } else {
+    return `Colors.${config}`;
   }
-  return;
 }

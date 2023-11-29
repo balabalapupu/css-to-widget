@@ -11,24 +11,24 @@ export const widgetMap = {
   border: BorderInset,
 };
 
-export class EdgeComponents {
+export class EdgeComponents implements StyleComponentsClassInterface {
   private key: edgeComponentsKey;
-  private value: string;
+  private value: any;
   private valueFormal: ValueFormatType;
   private direction: string;
   constructor(
     key: edgeComponentsKey,
     valueFormat: ValueFormatType,
-    arg: StyleDetailInfoType
+    arg: StyleComponentsType
   ) {
     this.key = key;
     this.valueFormal = valueFormat;
     this.direction = arg.direction ?? "";
   }
-  public setValue(config) {
-    this.value = config;
+  public setValue(value: any): void {
+    this.value = value;
   }
-  public getValue() {
+  public getValue(): OutPutType {
     if (widgetMap[this.key]) {
       const curWidgetList = widgetMap[this.key];
       return {

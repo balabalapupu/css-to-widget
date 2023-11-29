@@ -33,28 +33,42 @@ export function convertStyleListToWidgetList(
   const result = [];
   try {
     styleList.forEach((item) => {
-      if (!ignoreKey.includes(item.styleKey)) {
-        const currentComponentList: StyleDetailInfoType = styleMap.find(
-          (_item) => _item.originKey == item.styleKey
-        );
-        if (!currentComponentList) {
-          throw new Error("检查圈选范围，是否有key没圈选全");
-        }
-        const __value = item.styleValue.trim();
-        const curStyleComponent = currentComponentList.components;
-        const curStylekey = currentComponentList.key;
-        const curStyleValueFormat = currentComponentList.valueFormat ?? null;
-        const curClass = new curStyleComponent(
-          curStylekey,
-          curStyleValueFormat,
-          currentComponentList
-        );
-        curClass.setValue(__value);
-        const curClassOutput = curClass.getValue();
-        const str = `${curClassOutput.key}: ${curClassOutput.value},\n`;
+      if (ignoreKey.includes(item.styleKey)) {
+        return;
+      }
+      const currentComponentList: StyleComponentsType = styleMap.find(
+        (_item) => _item.originKey == item.styleKey
+      );
+      if (!currentComponentList) {
+        throw new Error("检查圈选范围，是否有key没圈选全");
+      }
+      const __value = item.styleValue.trim();
+      const {
+        components: curStyleComponent,
+        key: curStylekey,
+        valueFormat: curStyleValueFormat,
+        decorator: curDecorator = "insert",
+      } = currentComponentList;
+      const curClass = new curStyleComponent(
+        curStylekey,
+        curStyleValueFormat,
+        currentComponentList
+      );
+      curClass.setValue(__value);
+      const curClassOutput = curClass.getValue();
+
+      // 输出字符串 or 数组
+      if (Array.isArray(curClassOutput)) {
+        curClassOutput.forEach((__item) => {
+          result.push({
+            type: curDecorator,
+            str: `${__item.key}: ${__item.value},\n`,
+          });
+        });
+      } else {
         result.push({
-          type: currentComponentList?.decorator ?? "insert",
-          str,
+          type: curDecorator,
+          str: `${curClassOutput.key}: ${curClassOutput.value},\n`,
         });
       }
     });
@@ -68,6 +82,7 @@ export function createOutPut(config: WidgetListType[]): string {
   const result = {
     insert: [],
     BoxDecoration: [],
+    BoxConstraints: [],
   };
 
   config.forEach((item) => {
@@ -75,6 +90,8 @@ export function createOutPut(config: WidgetListType[]): string {
       result.insert.push(item.str);
     } else if (item.type === "BoxDecoration") {
       result.BoxDecoration.push(item.str);
+    } else if (item.type == "BoxConstraints") {
+      result.BoxConstraints.push(item.str);
     }
   });
 
@@ -84,6 +101,11 @@ export function createOutPut(config: WidgetListType[]): string {
   }
   if (result.BoxDecoration.length > 0) {
     resultStr += `decoration: BoxDecoration(\n${result.BoxDecoration.join(
+      ""
+    )}),\n`;
+  }
+  if (result.BoxConstraints.length > 0) {
+    resultStr += `constraints: BoxConstraints(\n${result.BoxConstraints.join(
       ""
     )}),\n`;
   }
