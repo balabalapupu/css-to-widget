@@ -159,6 +159,8 @@ const boxComponentsList: BoxComponentsListType[] = [
     decorator: "BoxConstraints",
   },
 ];
+
+// 这里放各种css样式-flutter响应式的转换逻辑
 export const styleMap: StyleComponentsType[] = [
   ...baseComponentsList,
   ...edgeComponentsList,
